@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #030712;
+    color: white;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #030712; }
+  ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 99px; }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #818cf8, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-gold {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 10px 30px -8px rgba(99, 102, 241, 0.4);
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    background-color: #6366f1;
+    transform: scale(1.04);
+  }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-primary:disabled {
+    background-color: #374151;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.04);
+  }
+  .btn-secondary:active { transform: scale(0.97); }
+
+  .card-hover {
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .card-hover:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.25);
+  }
+
+  /* Initial hidden states — spring JS drives the reveal, no CSS transition */
+  .scroll-reveal { opacity: 0; transform: translateY(48px); }
+  .scroll-pop    { opacity: 0; transform: scale(0.82) translateY(28px); }
+  .scroll-left   { opacity: 0; transform: translateX(-72px); }
+  .scroll-right  { opacity: 0; transform: translateX(72px); }
+  .scroll-scale  { opacity: 0; transform: scale(0.75) translateY(32px); }
+  .scroll-flip   { opacity: 0; transform: perspective(900px) rotateX(30deg) translateY(44px); }
+
+  .text-shimmer {
+    background: linear-gradient(90deg, #818cf8 20%, #e879f9 50%, #818cf8 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .animate-float   { animation: float 4s ease-in-out infinite; }
+  .animate-scan    { animation: scan 4s ease-in-out infinite; }
+  .animate-float-slow    { animation: float 6s ease-in-out infinite; }
+  .animate-float-delayed { animation: float 5s ease-in-out 1.5s infinite; }
+  .animate-blob   { animation: blob 8s ease-in-out infinite; }
+  .animate-blob-delayed { animation: blob 10s ease-in-out 2s infinite; }
+  .animate-marquee { animation: marquee 28s linear infinite; }
+  .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+  .animate-glow   { animation: pulse-glow 2s ease-in-out infinite; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0,0) scale(1);    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+  33%       { transform: translate(40px,-30px) scale(1.1); border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; }
+  66%       { transform: translate(-20px,20px) scale(0.95); border-radius: 50% 60% 30% 60%/40% 50% 60% 50%; }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.4); }
+  50%       { box-shadow: 0 0 60px rgba(99,102,241,0.8), 0 0 100px rgba(168,85,247,0.3); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes scan {
+  0%, 100% { transform: translateY(-200%); opacity: 0; }
+  20%       { opacity: 1; }
+  80%       { opacity: 1; }
+  50%       { transform: translateY(400%); }
+}
+
+@keyframes card-shimmer {
+  0%   { transform: translateX(-150%); }
+  100% { transform: translateX(350%); }
+}
